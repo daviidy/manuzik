@@ -39,7 +39,7 @@ class PlaylistController extends Controller
         return redirect()->back()->with('success', 'Playlist updated successfully.');
     }
 
-    public function delete(Request $request, $id)
+    public function destroy(Request $request, $id)
     {
         $playlist = Playlist::findOrFail($id);
 
