@@ -83,7 +83,7 @@ class MusicController extends Controller
             $data['image'] = $path;
         }
 
-        $music = $music->update($data);
+        $music->update($data);
 
         if ($request->has('playlist_ids')) {
             $playlistIds = $request->input('playlist_ids');
@@ -95,7 +95,7 @@ class MusicController extends Controller
         return redirect()->back()->with('success', 'Music Uploaded successfully');
     }
 
-    public function delete(Request $request, $id)
+    public function destroy(Request $request, $id)
     {
         $music = Music::findOrFail($id);
 
@@ -110,5 +110,4 @@ class MusicController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Music deleted successfully.');
     }
-}
 }

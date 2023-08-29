@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -28,5 +29,7 @@ Route::post('/create-user', [UserController::class, 'createUserWithCredentials']
 Route::delete('/delete-user/{id}', [UserController::class, 'deleteUser']);
 
 Route::resource('playlists', PlaylistController::class);
+
+Route::resource('musics', MusicController::class);
 
 require __DIR__.'/auth.php';
