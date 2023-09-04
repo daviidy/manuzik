@@ -20,9 +20,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [UserController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
 Route::post('/create-user', [UserController::class, 'createUserWithCredentials']);
 
