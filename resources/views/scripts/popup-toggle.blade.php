@@ -30,7 +30,6 @@
     // Hide the modal when the overlay (background) is clicked
     modals.forEach(function(modal) {
         modal.addEventListener('click', function(event) {
-            console.log(event.target)
             const id = modal.getAttribute('id');
             if (event.target === document.getElementById(id+"Panel")) {
                 modal.classList.add('hidden');

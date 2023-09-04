@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Playlist;
+use App\Models\Music;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function home() {
-        return view('dashboard');
+        $musics = Music::with('playlists')->orderBy('title')->orderBy('notation')->get();
+        return view('dashboard', ['musics' => $musics]);
     }
     public function createUserWithCredentials(Request $request)
     {

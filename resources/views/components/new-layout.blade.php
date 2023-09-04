@@ -35,6 +35,7 @@
                 </div>
             </header>
 
+            @include('alerts.success')
             <!-- Page Content -->
             <main>
                 {{ $slot }}

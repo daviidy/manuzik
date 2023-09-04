@@ -27,7 +27,8 @@
       -->
             <div
                 class="p-6 modal-body relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl">
-                <form enctype="multipart/form-data">
+                <form method="post" action="{{route('musics.store')}}" enctype="multipart/form-data">
+                    @csrf
                     <div class="space-y-12">
                         <div class="border-b border-gray-900/10 pb-12">
                             <h2 class="text-base font-semibold leading-7 text-gray-900">Ajouter une musique</h2>
@@ -36,7 +37,7 @@
 
                             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                 <div class="sm:col-span-4">
-                                    <label for="username"
+                                    <label for="title"
                                         class="block text-sm font-medium leading-6 text-gray-900">Titre</label>
                                     <div class="mt-2">
                                         <div
@@ -49,7 +50,7 @@
                                 </div>
 
                                 <div class="sm:col-span-4">
-                                    <label for="username"
+                                    <label for="artist"
                                         class="block text-sm font-medium leading-6 text-gray-900">Artiste</label>
                                     <div class="mt-2">
                                         <div
@@ -62,7 +63,7 @@
                                 </div>
 
                                 <div class="sm:col-span-4">
-                                    <label for="username"
+                                    <label for="album"
                                         class="block text-sm font-medium leading-6 text-gray-900">Album</label>
                                     <div class="mt-2">
                                         <div
@@ -75,7 +76,7 @@
                                 </div>
 
                                 <div class="sm:col-span-4">
-                                    <label for="username"
+                                    <label for="year"
                                         class="block text-sm font-medium leading-6 text-gray-900">Annee</label>
                                     <div class="mt-2">
                                         <div
@@ -88,7 +89,7 @@
                                 </div>
 
                                 <div class="sm:col-span-4">
-                                    <label for="username"
+                                    <label for="genre"
                                         class="block text-sm font-medium leading-6 text-gray-900">Genre</label>
                                     <div class="mt-2">
                                         <div
@@ -101,12 +102,12 @@
                                 </div>
 
                                 <div class="sm:col-span-4">
-                                    <label for="username"
+                                    <label for="notation"
                                         class="block text-sm font-medium leading-6 text-gray-900">Notation</label>
                                     <div class="mt-2">
                                         <div
                                             class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                            <input type="text" name="notation" id="notation"
+                                            <input type="number" name="notation" id="notation"
                                                 class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                                 placeholder="0 ou 1">
                                         </div>
@@ -218,9 +219,9 @@
                 const optionValue = options[i].value;
 
                 if (optionText.includes(searchText)) {
-                    options[i].style.display = 'block';
+                    options[i].selected = true;
                 } else {
-                    options[i].style.display = 'none';
+                    options[i].selected = false;
                 }
             }
         });

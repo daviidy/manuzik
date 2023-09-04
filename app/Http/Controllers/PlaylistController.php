@@ -21,7 +21,7 @@ class PlaylistController extends Controller
 
         $playlist = Playlist::create($request->all());
 
-        return response()->json($playlist, 201);
+        return redirect()->back()->with('success', 'Playlist created successfully.');
     }
 
     public function update(Request $request, $id)

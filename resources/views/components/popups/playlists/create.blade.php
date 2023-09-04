@@ -27,7 +27,8 @@
       -->
             <div
                 class="p-6 modal-body relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl">
-                <form enctype="multipart/form-data">
+                <form method="post" action="{{ route('playlists.store') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="space-y-12">
                         <div class="border-b border-gray-900/10 pb-12">
                             <h2 class="text-base font-semibold leading-7 text-gray-900">Ajouter une playlist</h2>
@@ -35,7 +36,7 @@
 
                             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                 <div class="sm:col-span-4">
-                                    <label for="username"
+                                    <label for="title"
                                         class="block text-sm font-medium leading-6 text-gray-900">Titre</label>
                                     <div class="mt-2">
                                         <div
