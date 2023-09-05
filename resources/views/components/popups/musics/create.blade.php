@@ -115,6 +115,18 @@
                                 </div>
 
                                 <div class="sm:col-span-4">
+                                    <label for="audio"
+                                        class="block text-sm font-medium leading-6 text-gray-900">Fichier audio</label>
+                                    <div class="mt-2">
+                                        <div
+                                            class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                            <input type="file" name="audio" id="audio"
+                                                class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sm:col-span-4">
                                     <label for="username"
                                         class="block text-sm font-medium leading-6 text-gray-900">Playlist</label>
                                     <div class="mt-2">
@@ -132,7 +144,7 @@
 
                                 <div class="col-span-full">
                                     <label for="photo"
-                                        class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
+                                        class="block text-sm font-medium leading-6 text-gray-900">Photo de l'album</label>
                                     <div class="mt-2 flex items-center gap-x-3">
                                         <input type="file" id="photoInput" name="image" accept="image/*"
                                             class="hidden">

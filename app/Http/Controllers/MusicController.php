@@ -25,6 +25,7 @@ class MusicController extends Controller
             'genre' => 'required|string',
             'notation' => 'required|integer|min:0|max:5',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'audio' => 'file|mimes:mp3,mpeg,wav|max:20480',
             'playlist_ids' => 'nullable|array'
         ]);
 
@@ -40,6 +41,17 @@ class MusicController extends Controller
             );
 
             $data['image'] = $path;
+        }
+
+        if ($request->hasFile('audio')) {
+            $audio_extension = $request->file('audio')->getClientOriginalExtension();
+            $audio_name = time() . '_' . $request->title . '.' . $audio_extension;
+            $path = $request->file('audio')->storeAs(
+                'public/audio',
+                $audio_name
+            );
+
+            $data['audio'] = 'audio/' . $audio_name;
         }
 
         $music = Music::create($data);

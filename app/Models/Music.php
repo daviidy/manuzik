@@ -17,6 +17,7 @@ class Music extends Model
         'genre',
         'notation',
         'image',
+        'audio'
     ];
 
     public function playlists()
