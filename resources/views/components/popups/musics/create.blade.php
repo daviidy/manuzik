@@ -150,7 +150,7 @@
                                             class="hidden">
                                         <label for="photoInput" class="cursor-pointer">
                                             <img id="photoPreview" class="h-12 w-12 text-gray-300"
-                                                src="https://img.freepik.com/premium-photo/generative-ai-illustration-music-notes-flowing-from-wireless-headphones-against-city-street-clouds_501669-25375.jpg"
+                                                src="{{env('DEFAULT_IMAGE')}}"
                                                 alt="Image de la musique">
                                         </label>
                                         <button id="changePhoto" type="button"
