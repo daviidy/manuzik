@@ -21,13 +21,13 @@
                         <p class="text-sm leading-6 text-gray-900"> {{ $music->artist }} </p>
                         <div class="flex mt-1 leading-5 justify-between">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" id="open-editMusicModal{{ $music->id }}"
+                                stroke-width="1.5" stroke="currentColor" id="open-editModal{{ $music->id }}"
                                 class="trigger-edit-modal cursor-pointer w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                             </svg>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" id="open-deleteMusicModal{{ $music->id }}"
+                                stroke-width="1.5" stroke="currentColor" id="open-deleteModal{{ $music->id }}"
                                 class="trigger-delete-modal cursor-pointer ml-2 w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -41,12 +41,12 @@
     </div>
 
     @foreach ($musics as $music)
-        <div id="editMusicModal{{ $music->id }}" class="modal fade hidden relative z-10"
+        <div id="editModal{{ $music->id }}" class="modal fade hidden relative z-10"
             aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
             <div class="fixed inset-0 z-10 overflow-y-auto">
-                <div id="editMusicModal{{ $music->id }}Panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="editModal{{ $music->id }}Panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
                         class="p-6 modal-body relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl">
                         <form method="post" action="{{ route('musics.update', $music->id) }}"
@@ -196,12 +196,12 @@
     @endforeach
 
     @foreach ($musics as $music)
-        <div id="deleteMusicModal{{ $music->id }}" class="modal fade hidden relative z-10"
+        <div id="deleteModal{{ $music->id }}" class="modal fade hidden relative z-10"
             aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
             <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div id="deleteMusicModal{{ $music->id }}Panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="deleteModal{{ $music->id }}Panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
                         class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                         <form method="post" action="{{ route('musics.destroy', $music->id) }}"

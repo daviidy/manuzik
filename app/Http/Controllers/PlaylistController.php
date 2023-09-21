@@ -10,13 +10,13 @@ class PlaylistController extends Controller
     public function index()
     {
         $playlists = Playlist::all();
-        return response()->json($playlists);
+        return view('playlists.index', ['playlists' => $playlists]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|max:255',
         ]);
 
         $playlist = Playlist::create($request->all());

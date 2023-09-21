@@ -30,7 +30,7 @@
         <div class="w-5/6 bg-gray-200 flex-1">
             <!-- Page Heading -->
             <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 lg:text-center">
                     {{ $header }}
                 </div>
             </header>
