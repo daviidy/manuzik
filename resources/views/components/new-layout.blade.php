@@ -36,6 +36,7 @@
             </header>
 
             @include('alerts.success')
+            @include('alerts.error')
             <!-- Page Content -->
             <main>
                 {{ $slot }}
@@ -45,6 +46,7 @@
     </div>
     <x-popups.musics.create />
     <x-popups.playlists.create />
+    <x-popups.users.create />
     @include('scripts.popup-toggle');
 </body>
 

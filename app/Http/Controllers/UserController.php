@@ -9,7 +9,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function home() {
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', ['users' => $users]);
+    }
+
+    public function home()
+    {
         $musics = Music::with('playlists')->orderBy('title')->orderBy('notation')->get();
         return view('dashboard', ['musics' => $musics]);
     }
@@ -18,7 +25,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+            'password' => 'required|min:4',
         ]);
 
         // Create a new user
@@ -28,7 +35,28 @@ class UserController extends Controller
         $user->password = Hash::make($validatedData['password']);
         $user->save();
 
-        return response()->json(['message' => 'User created successfully'], 201);
+        return redirect()->back()->with('success', 'User created successfully');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        if ($user !== null) {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email',
+            ]);
+
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+
+            $user->save();
+
+            return redirect()->back()->with('success', 'User updated successfully');
+        }
+
+        return redirect()->back()->with('error', 'User not found');
+
     }
 
     public function deleteUser($id)
@@ -37,5 +65,14 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['message' => 'User deleted successfully']);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return redirect()->back()->with('success', 'User deleted successfully.');
     }
 }

@@ -22,12 +22,14 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [UserController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
-Route::post('/create-user', [UserController::class, 'createUserWithCredentials']);
+Route::post('/create-user', [UserController::class, 'createUserWithCredentials'])->name('createUser');
 
 Route::delete('/delete-user/{id}', [UserController::class, 'deleteUser']);
 
 Route::resource('playlists', PlaylistController::class);
 
 Route::resource('musics', MusicController::class);
+
+Route::resource('users', UserController::class);
 
 require __DIR__.'/auth.php';

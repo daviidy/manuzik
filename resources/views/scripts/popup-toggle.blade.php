@@ -17,6 +17,7 @@
     // Get references to the modal and buttons
     let addMusicModalButton = document.getElementById('addMusicModalButton');
     let addPlaylistModalButton = document.getElementById('addPlaylistModalButton');
+    let addUserModalButton = document.getElementById('addUserModalButton');
 
     // Show the modal when the "Open Modal" button is clicked
     addMusicModalButton.addEventListener('click', function() {
@@ -25,6 +26,10 @@
 
     addPlaylistModalButton.addEventListener('click', function() {
         toggleModal('addPlaylistModal');
+    });
+
+    addUserModalButton.addEventListener('click', function() {
+        toggleModal('addUserModal');
     });
 
     // Hide the modal when the overlay (background) is clicked
