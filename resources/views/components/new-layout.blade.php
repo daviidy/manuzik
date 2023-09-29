@@ -48,7 +48,6 @@
     <x-popups.playlists.create />
     <x-popups.users.create />
     @include('scripts.popup-toggle');
-    @include('scripts.music-player');
 </body>
 
 </html>

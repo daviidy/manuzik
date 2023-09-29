@@ -107,6 +107,17 @@ class MusicController extends Controller
         return redirect()->back()->with('success', 'Music Uploaded successfully');
     }
 
+    public function search(Request $request)
+    {
+        $searchQuery = $request->input('search');
+
+        $musics = Music::where('title', 'like', '%' . $searchQuery . '%')
+            ->orWhere('artist', 'like', '%' . $searchQuery . '%')
+            ->get();
+
+        return redirect()->back()->with('musics', $musics);
+    }
+
     public function destroy(Request $request, $id)
     {
         $music = Music::findOrFail($id);

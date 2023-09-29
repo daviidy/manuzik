@@ -27,9 +27,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $playlists = Playlist::orderBy('title')->get();
-        $musics = Music::with('playlists')->orderBy('title')->orderBy('notation')->get();
+        // $musics = Music::with('playlists')->orderBy('title')->orderBy('notation')->get();
 
         // Share the $playlists variable with all views
-        View::share(['playlists' => $playlists, 'musics' => $musics]);
+        View::share([
+            'playlists' => $playlists,
+            // 'musics' => $musics
+        ]);
     }
 }

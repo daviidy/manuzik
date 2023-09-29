@@ -1,17 +1,31 @@
 <x-new-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Playlists') }}
-        </h2>
+        <div class="flex justify-center items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Playlists') }}
+            </h2>
+        </div>
     </x-slot>
 
+    @php
+        if (session('playlists')) {
+            $playlists = session('playlists');
+        }
+    @endphp
+
     <div class="py-12">
+        @include('includes.search', [
+            'routeName' => 'searchPlaylist',
+            'placeholder' => 'Search Playlist...',
+        ])
         @foreach ($playlists as $playlist)
             <ul role="list" class="divide-y divide-gray-100 p-6">
                 <li class="flex justify-between gap-x-6 py-5 bg-white rounded">
                     <div class="flex min-w-0 gap-x-4 p-6">
                         <div class="min-w-0 flex-auto">
-                            <p class="text-sm font-semibold leading-6 text-gray-900"> {{ $playlist->title }} </p>
+                            <p class="text-sm font-semibold leading-6 text-gray-900">
+                                <a href="{{ route('playlists.show', $playlist->id) }}">{{ $playlist->title }}</a>
+                            </p>
                         </div>
                     </div>
                     <div class="sm:flex sm:flex-col sm:items-end p-6">
@@ -37,18 +51,19 @@
     </div>
 
     @foreach ($playlists as $playlist)
-        <div id="editModal{{ $playlist->id }}" class="modal fade hidden relative z-10"
-            aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div id="editModal{{ $playlist->id }}" class="modal fade hidden relative z-10" aria-labelledby="modal-title"
+            role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
             <div class="fixed inset-0 z-10 overflow-y-auto">
-                <div id="editModal{{ $playlist->id }}Panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="editModal{{ $playlist->id }}Panel"
+                    class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
                         class="p-6 modal-body relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl">
                         <form method="post" action="{{ route('playlists.update', $playlist->id) }}"
                             enctype="multipart/form-data">
                             @csrf
-                            {{method_field('patch')}}
+                            {{ method_field('patch') }}
                             <div class="space-y-12">
                                 <div class="border-b border-gray-900/10 pb-12">
                                     <h2 class="text-base font-semibold leading-7 text-gray-900">Modifier une playlist
@@ -87,12 +102,13 @@
     @endforeach
 
     @foreach ($playlists as $playlist)
-        <div id="deleteModal{{ $playlist->id }}" class="modal fade hidden relative z-10"
-            aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div id="deleteModal{{ $playlist->id }}" class="modal fade hidden relative z-10" aria-labelledby="modal-title"
+            role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
             <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div id="deleteModal{{ $playlist->id }}Panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="deleteModal{{ $playlist->id }}Panel"
+                    class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
                         class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                         <form method="post" action="{{ route('playlists.destroy', $playlist->id) }}"

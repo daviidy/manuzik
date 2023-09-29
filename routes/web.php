@@ -26,6 +26,10 @@ Route::post('/create-user', [UserController::class, 'createUserWithCredentials']
 
 Route::delete('/delete-user/{id}', [UserController::class, 'deleteUser']);
 
+Route::post('playlists/search', [PlaylistController::class, 'search'])->name('searchPlaylist');
+
+Route::post('musics/search', [MusicController::class, 'search'])->name('searchMusic');
+
 Route::resource('playlists', PlaylistController::class);
 
 Route::resource('musics', MusicController::class);
