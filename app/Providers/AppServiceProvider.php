@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Music;
 use App\Models\Playlist;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -26,8 +27,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $playlists = Playlist::orderBy('title')->get();
+        $musics = Music::with('playlists')->orderBy('title')->orderBy('notation')->get();
 
         // Share the $playlists variable with all views
-        View::share('playlists', $playlists);
+        View::share(['playlists' => $playlists, 'musics' => $musics]);
     }
 }

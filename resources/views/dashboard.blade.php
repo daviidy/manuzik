@@ -10,7 +10,8 @@
             <ul role="list" class="divide-y divide-gray-100 p-6">
                 <li class="flex justify-between gap-x-6 py-5 bg-white rounded">
                     <div class="flex min-w-0 gap-x-4 p-6">
-                        <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
+                        <img data-title="{{$music->title}}" id="{{ $music->audio ? asset('storage/'.$music->audio) : '' }}"
+                            class="music h-12 w-12 cursor-pointer flex-none rounded-full bg-gray-50"
                             src="{{ Storage::disk('s3')->url($music->image) }}" alt="">
                         <div class="min-w-0 flex-auto">
                             <p class="text-sm font-semibold leading-6 text-gray-900"> {{ $music->title }} </p>
@@ -35,24 +36,55 @@
 
                             </p>
                         </div>
+                    </div>
                 </li>
             </ul>
         @endforeach
+
+        <div id="music-player" class="hidden shadow-black fixed bottom-0 bg-white shadow-lg p-8 w-5/6 h-1/6 flex justify-center items-center">
+            <div class="flex justify-center items-center">
+                <img id="player-image" class="h-12 w-12 mx-4 cursor-pointer flex-none rounded-full bg-gray-50"
+                    src="{{ env('DEFAULT_IMAGE') }}" alt="">
+                    <span id="player-title" class="font-bold"></span>
+            </div>
+            <div class="flex justify-center px-8 items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" id="previous" class="mx-8 cursor-pointer w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" id="play" class="mx-8 cursor-pointer w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" id="pause" class="mx-8 cursor-pointer w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" id="next" class="mx-8 cursor-pointer w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+            </div>
+            {{-- <div class="absolute inset-0 backdrop backdrop-blur-10 bg-gradient-to-b from-transparent to-black"> --}}
+        </div>
     </div>
 
     @foreach ($musics as $music)
-        <div id="editModal{{ $music->id }}" class="modal fade hidden relative z-10"
-            aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div id="editModal{{ $music->id }}" class="modal fade hidden relative z-10" aria-labelledby="modal-title"
+            role="dialog" aria-modal="true">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
             <div class="fixed inset-0 z-10 overflow-y-auto">
-                <div id="editModal{{ $music->id }}Panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="editModal{{ $music->id }}Panel"
+                    class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
                         class="p-6 modal-body relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl">
                         <form method="post" action="{{ route('musics.update', $music->id) }}"
                             enctype="multipart/form-data">
                             @csrf
-                            {{method_field('patch')}}
+                            {{ method_field('patch') }}
                             <div class="space-y-12">
                                 <div class="border-b border-gray-900/10 pb-12">
                                     <h2 class="text-base font-semibold leading-7 text-gray-900">Modifier une musique
@@ -201,7 +233,8 @@
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
             <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div id="deleteModal{{ $music->id }}Panel" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="deleteModal{{ $music->id }}Panel"
+                    class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <div
                         class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                         <form method="post" action="{{ route('musics.destroy', $music->id) }}"
